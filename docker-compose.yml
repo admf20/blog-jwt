@@ -1,0 +1,40 @@
+services:
+  spring-api-blog:
+    image: api-blog-jwt-mysql #imagen del contenedor
+    container_name: api-blog #nombre del contenedor
+    build: #para que me construye automáticamente la imagen
+      context: . #Ruta donde está el dockerfile se pone "." ya que estamos en el mismo directorio
+      dockerfile: Dockerfile #nombre del archivo
+    ports:
+      - "8080:8080" #del puerto nosotros - al del servidor
+    networks:
+      - spring-blog_jwt-network #es importante que los dos contenedores estén conectados a la misma red para su comunicación
+    depends_on: #es importante poner esto para indicarle a docker que esta imagen depende de que primero se cargue la bd ya, que si no es asi va generár error de manera inmediata
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.0 #en mysql es muy importante tener esta version o la que está estable en el momento
+    container_name: docker_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin1234 #contraseña del root
+      MYSQL_DATABASE: blog_jwt #bd del proyecto
+      MYSQL_USER: admin_docker #usuario que creamos ya, que no es recomendable trabajar con el root que tiene por defecto
+      MYSQL_PASSWORD: docker123 #contraseña usuario que creamos
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uadmin_docker", "-pdocker123" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "3707:3306"
+    networks:
+      - spring-blog_jwt-network
+    volumes:
+      - mysql-blog_jwt-volume:/var/lib/mysql #donde se va almacenar la BD y configuración de la BD
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  spring-blog_jwt-network:
+volumes:
+  mysql-blog_jwt-volume:
