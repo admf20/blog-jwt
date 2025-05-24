@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, String>> handleRuntime(RuntimeException ex) {
         Map<String, String> respuesta = new HashMap<>();
-        respuesta.put("error", ex.getMessage());
+        respuesta.put("error: ", ex.getMessage());
         return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
     }
 
@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
 
         ex.getConstraintViolations()
                 .forEach(error -> {
-                    errors.put("Param" ,error.getMessage());
+                    errors.put("Parámetro: " ,error.getMessage());
                 });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }

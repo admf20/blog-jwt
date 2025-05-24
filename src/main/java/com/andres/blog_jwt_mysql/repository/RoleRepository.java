@@ -2,6 +2,7 @@ package com.andres.blog_jwt_mysql.repository;
 
 import com.andres.blog_jwt_mysql.model.ERole;
 import com.andres.blog_jwt_mysql.model.RoleEntity;
+import com.andres.blog_jwt_mysql.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
