@@ -1,7 +1,7 @@
 package com.andres.blog_jwt_mysql.controller;
 
 import com.andres.blog_jwt_mysql.model.dto.PostDTO;
-import com.andres.blog_jwt_mysql.response.ApiResponse;
+import com.andres.blog_jwt_mysql.util.response.ApiResponse;
 import com.andres.blog_jwt_mysql.service.PostService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

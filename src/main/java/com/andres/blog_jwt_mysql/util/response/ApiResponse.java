@@ -1,4 +1,4 @@
-package com.andres.blog_jwt_mysql.response;
+package com.andres.blog_jwt_mysql.util.response;
 
 public class ApiResponse <T>{
     private int status;

@@ -1,4 +1,4 @@
-package com.andres.blog_jwt_mysql.service.security;
+package com.andres.blog_jwt_mysql.service.UserDetailServices;
 
 import com.andres.blog_jwt_mysql.model.UserEntity;
 import com.andres.blog_jwt_mysql.repository.UserRepository;
@@ -20,9 +20,8 @@ public class UserDetailsServicesImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         UserEntity user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Usuario por el ".concat(username).concat("no existe en la BD")));
+                .orElseThrow(() -> new RuntimeException("Usuario por el ".concat(username).concat(" no existe en la BD")));
 
-        System.out.println(user.getUsername());
         return new UserDetailsImpl(user);
     }
 }

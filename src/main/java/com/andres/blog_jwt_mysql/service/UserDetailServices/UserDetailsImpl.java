@@ -1,13 +1,11 @@
-package com.andres.blog_jwt_mysql.service.security;
+package com.andres.blog_jwt_mysql.service.UserDetailServices;
 
 import com.andres.blog_jwt_mysql.model.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {

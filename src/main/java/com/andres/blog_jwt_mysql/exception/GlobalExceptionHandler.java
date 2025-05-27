@@ -3,6 +3,7 @@ package com.andres.blog_jwt_mysql.exception;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -29,6 +30,13 @@ public class GlobalExceptionHandler {
     // Maneja errores simples (como RuntimeException lanzados manualmente)
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, String>> handleRuntime(RuntimeException ex) {
+        Map<String, String> respuesta = new HashMap<>();
+        respuesta.put("error: ", ex.getMessage());
+        return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<Map<String, String>> handleBadCredentialsException(RuntimeException ex) {
         Map<String, String> respuesta = new HashMap<>();
         respuesta.put("error: ", ex.getMessage());
         return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
