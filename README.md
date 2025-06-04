@@ -48,8 +48,9 @@ blog-jwt/
 ## 🔐 Seguridad con JWT
 Esta API está protegida mediante Spring Security y JWT.
 Los usuarios deben autenticarse para obtener un token que deben enviar en el header:
-
-- Authorization: Bearer <token>
+```makelife
+Authorization: Bearer <token>
+```
 
 ## 📦 Endpoints principales
 ### 🔐 Autenticación (/api/auth)
